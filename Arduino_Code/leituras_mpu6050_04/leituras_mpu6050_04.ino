@@ -28,13 +28,13 @@ float gx, gy, gz;
 
 float lin_ax, lin_ay, lin_az;
 
-float prev_ax = 0.0, prev_ay = 0.0, prev_az = 0.0;
-float prev_gx = 0.0, prev_gy = 0.0, prev_gz = 0.0;
+float prev_ax, prev_ay, prev_az;
+float prev_gx, prev_gy, prev_gz;
 
-float prev_lin_ax = 0.0, prev_lin_ay = 0.0, prev_lin_az = 0.0;
+float prev_lin_ax, prev_lin_ay, prev_lin_az;
 
 float velocityX, velocityY, velocityZ;
-float prev_velocityX = 0.0, prev_velocityY = 0.0, prev_velocityZ = 0.0;
+float prev_velocityX, prev_velocityY, prev_velocityZ;
 float distanceX, distanceY, distanceZ;
 
 volatile bool read = false;
@@ -292,11 +292,11 @@ void loop() {
 
       accelerometerData();
 
-      Serial.print(lin_ax, 4);+
+      Serial.print(velocityX, 4);
       Serial.print(",");
-      Serial.print(lin_ay, 4);
+      Serial.print(velocityY, 4);
       Serial.print(",");
-      Serial.print(lin_az, 4);
+      Serial.print(velocityZ, 4);
       Serial.println();
 
       // Calibração Remoção Ruído
