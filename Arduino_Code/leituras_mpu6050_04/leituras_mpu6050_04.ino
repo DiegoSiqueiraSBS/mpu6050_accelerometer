@@ -27,11 +27,10 @@ float ax, ay, az;
 float gx, gy, gz;
 
 float lin_ax, lin_ay, lin_az;
+float prev_lin_ax, prev_lin_ay, prev_lin_az;
 
 float prev_ax, prev_ay, prev_az;
 float prev_gx, prev_gy, prev_gz;
-
-float prev_lin_ax, prev_lin_ay, prev_lin_az;
 
 float velocityX, velocityY, velocityZ;
 float prev_velocityX, prev_velocityY, prev_velocityZ;
@@ -267,7 +266,6 @@ void readSensor() {
 }
 
 ISR(TIMER2_OVF_vect) {
-  t = t + 0.01;
   read = true;
 
   TCNT2 = 99;
@@ -292,11 +290,15 @@ void loop() {
 
       accelerometerData();
 
+      Serial.print(rawAx, 4);
+      Serial.print(",");
+      Serial.print(ax, 4);
+      Serial.print(",");
+      Serial.print(lin_ax, 4);
+      Serial.print(",");
       Serial.print(velocityX, 4);
       Serial.print(",");
-      Serial.print(velocityY, 4);
-      Serial.print(",");
-      Serial.print(velocityZ, 4);
+      Serial.print(distanceX, 4);
       Serial.println();
 
       // Calibração Remoção Ruído
