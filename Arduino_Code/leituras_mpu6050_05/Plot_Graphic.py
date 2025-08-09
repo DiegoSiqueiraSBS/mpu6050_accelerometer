@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-df = pd.read_csv("Arduino_Code\\leituras_mpu6050_05\\dados_passa_alta.csv", sep=',')
+df = pd.read_csv("Arduino_Code\\leituras_mpu6050_05\\A_B_C_A.csv", sep=',')
 
 t = df['ax']
 x = df['newAx']
