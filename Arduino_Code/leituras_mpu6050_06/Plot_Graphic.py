@@ -10,8 +10,8 @@ y = df['high-pass']
 plt.figure(figsize=(15,8))
 
 plt.plot(t, label='Ax', color='blue')
-plt.plot(x, label='low-pass', color='red')
 plt.plot(y, label='high-pass', color='orange')
+plt.plot(x, label='low-pass', color='red')
 
 plt.grid()
 plt.title('Gráfico da aceleração em função do tempo')

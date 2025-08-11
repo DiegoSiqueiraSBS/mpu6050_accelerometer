@@ -88,21 +88,21 @@ void accelerometerData() {
   ay = rawAy / 16384;
   az = rawAz / 16384;
 
-  lowAx = alpha * ax + (1 - alpha) * prevLowAx;
-  lowAy = alpha * ay + (1 - alpha) * prevLowAy;
-  lowAz = alpha * az + (1 - alpha) * prevLowAz;
-
-  prevLowAx = lowAx;
-  prevLowAy = lowAy;
-  prevLowAz = lowAz;
-
-  highAx = alpha * lowAx - (1 - alpha) * prevHighAx;
-  highAy = alpha * lowAy - (1 - alpha) * prevHighAy;
-  highAz = alpha * lowAz - (1 - alpha) * prevHighAz;
+  highAx = alpha * ax - (1 - alpha) * prevHighAx;
+  highAy = alpha * ay - (1 - alpha) * prevHighAy;
+  highAz = alpha * az - (1 - alpha) * prevHighAz;
 
   prevHighAx = highAx;
   prevHighAy = highAy;
   prevHighAz = highAz;
+
+  lowAx = alpha * highAx + (1 - alpha) * prevLowAx;
+  lowAy = alpha * highAy + (1 - alpha) * prevLowAy;
+  lowAz = alpha * highAz + (1 - alpha) * prevLowAz;
+
+  prevLowAx = lowAx;
+  prevLowAy = lowAy;
+  prevLowAz = lowAz;
 }
 
 void setup() {
