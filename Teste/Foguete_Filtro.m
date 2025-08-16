@@ -1,6 +1,6 @@
 clear all
 close all
-data1 = csvread('sem_tremelique.csv', 1, 0);
+data1 = csvread('teste_2.csv', 1, 0);
 ax = 9.81*data1(:,1);
 taxa = 0.01;
 Ts = taxa;
@@ -9,8 +9,8 @@ t = 0:taxa:(length(ax)-1)*taxa;
 
 
 %%%%%Filtro IIR butterworth ou chebyshev
-Fr = 7;
-Fr2 = 20;
+Fr = 10;
+Fr2 = 30;
 OmegaC = 2*pi*Fr;% freq angulr
 OmegaC2 = 2*pi*Fr2;% freq angulr
 w = 0:0.1:10*OmegaC;
