@@ -1,7 +1,7 @@
 clear all
 close all
 
-data = csvread('data_a_g.csv');
+data = csvread('anguloss.csv');
 
 Accelerometer = data(:, 1:3);
 Gyroscope = data(:, 4:6);
@@ -36,7 +36,7 @@ hold off;
 print SensorData.pdf;
 linkaxes(axis, 'x');
 
-AHRS = MadgwickAHRS('SamplePeriod', 1/100, 'Beta', 0.3);
+AHRS = MadgwickAHRS('SamplePeriod', 1/100, 'Beta', 0.55);
 
 quaternion = zeros(length(time), 4);
 for t = 1:length(time)
