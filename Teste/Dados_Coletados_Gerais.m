@@ -1,11 +1,10 @@
 clear all
 close all
 
-data = csvread('data_a_g.csv')
+data = csvread('data_a_g.csv');
 
 Accelerometer = data(:, 1:3);
 Gyroscope = data(:, 4:6);
-Gyroscope = Gyroscope * (pi/180)
 
 taxa = 0.01;
 
@@ -34,9 +33,10 @@ xlabel('Time (s)');
 ylabel('Acceleration (g)');
 title('Accelerometer');
 hold off;
+print SensorData.pdf;
 linkaxes(axis, 'x');
 
-AHRS = MadgwickAHRS('SamplePeriod', 1/256, 'Beta', 0.1);
+AHRS = MadgwickAHRS('SamplePeriod', 1/100, 'Beta', 0.3);
 
 quaternion = zeros(length(time), 4);
 for t = 1:length(time)
@@ -56,3 +56,4 @@ xlabel('Time (s)');
 ylabel('Angle (deg)');
 legend('\phi', '\theta', '\psi');
 hold off;
+print Angulos.pdf;

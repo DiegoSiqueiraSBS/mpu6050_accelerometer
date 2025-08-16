@@ -146,22 +146,22 @@ void accelerometerData() {
   gz = rawGz / 131;
 
   // Filtro passa-baixa aceleração
-  ax = alpha * ax + (1 - alpha) * prev_ax;
-  ay = alpha * ay + (1 - alpha) * prev_ay;
-  az = alpha * az + (1 - alpha) * prev_az;
+  newAx = alpha * ax + (1 - alpha) * prev_ax;
+  newAy = alpha * ay + (1 - alpha) * prev_ay;
+  newAz = alpha * az + (1 - alpha) * prev_az;
 
-  prev_ax = ax;
-  prev_ay = ay;
-  prev_az = az;
+  prev_ax = newAx;
+  prev_ay = newAy;
+  prev_az = newAz;
 
   // Filtro passa-baixa giroscópio
-  gx = alphaGyro * gx + (1 - alphaGyro) * prev_gx;
-  gy = alphaGyro * gy + (1 - alphaGyro) * prev_gy;
-  gz = alphaGyro * gz + (1 - alphaGyro) * prev_gz;
+  newGx = alphaGyro * gx + (1 - alphaGyro) * prev_gx;
+  newGy = alphaGyro * gy + (1 - alphaGyro) * prev_gy;
+  newGz = alphaGyro * gz + (1 - alphaGyro) * prev_gz;
 
-  prev_gx = gx;
-  prev_gy = gy;
-  prev_gz = gz;
+  prev_gx = newGx;
+  prev_gy = newGy;
+  prev_gz = newGz;
 
   // Confirmar valores usando filtro
   filter.updateIMU(gx, gy, gz, ax, ay, az);
@@ -176,25 +176,25 @@ void accelerometerData() {
   float gZ = q0*q0 - q1*q1 - q2*q2 + q3*q3;
 
   // Remover gravidade
-  lin_ax = ax - gX;
-  lin_ay = ay - gY;
-  lin_az = az - gZ;
+  lin_ax = newAx - gX;
+  lin_ay = newAy - gY;
+  lin_az = newAz - gZ;
 
   // Filtro passa-baixa para aceleração linear
-  lin_ax = alpha * lin_ax + (1 - alpha) * prev_lin_ax;
-  lin_ay = alpha * lin_ay + (1 - alpha) * prev_lin_ay;
-  lin_az = alpha * lin_az + (1 - alpha) * prev_lin_az;
+  new_lin_ax = alpha * lin_ax + (1 - alpha) * prev_lin_ax;
+  new_lin_ay = alpha * lin_ay + (1 - alpha) * prev_lin_ay;
+  new_lin_az = alpha * lin_az + (1 - alpha) * prev_lin_az;
 
-  prev_lin_ax = lin_ax;
-  prev_lin_ay = lin_ay;
-  prev_lin_az = lin_az;
+  prev_lin_ax = new_lin_ax;
+  prev_lin_ay = new_lin_ay;
+  prev_lin_az = new_lin_az;
 
-  lin_ax -= linXCalibration;
-  lin_ay -= linYCalibration;
-  lin_az -= linZCalibration;
+  new_lin_ax -= linXCalibration;
+  new_lin_ay -= linYCalibration;
+  new_lin_az -= linZCalibration;
 
   // X calculus
-  if (lin_ax > 0.000000 && lin_ax < 0.001684) {
+  if (new_lin_ax > 0.000000 && new_lin_ax < 0.001684) {
     lin_ax = 0.00;
     velocityX = 0.00;
   }
