@@ -74,15 +74,42 @@ w = 0:0.1:10*OmegaC;
 N = 3; % Calculo da ordem do filtro
 OmegaD = OmegaC/(2*pi*Fs); % freq normalizada
 OmegaD2 = OmegaC2/(2*pi*Fs); % freq normalizada
-figure
+
 [bd,ad] = butter(N,OmegaD,'high'); %% Definição dos parametros do butterworth analogico
 y1 = filter(bd,ad,ax); %passa alta
 measurements = ax';
 [x, v] = kalman_evaluate(measurements, x0, P0);
-plot(t,x,t,measurements)
+
 ##figure
 ##plot(t,v)
 v2 = cumtrapz(x);
 p2 = cumtrapz(v);
+
 figure
-plotyy(t,p2,t,x)
+hold on
+axis(1) = subplot(2,2,1);
+plotyy(t, x, t, measurements)
+title('Gráfico Medições');
+legend('Filtrado', 'Raw')
+xlabel('Tempo(s)');
+ylabel('Aceleração(m/s²)');
+hold off
+
+axis(2) = subplot(2,2,2);
+hold on
+plot(t,v)
+title('Gráfico da Velocidade');
+legend('Velocidade');
+xlabel('Tempo(s)');
+ylabel('Velocidade(m/s)');
+hold off
+
+axis(3) = subplot(2,2,3);
+hold on;
+[hAx, hLine1, hLine2] = plotyy(t, x, t, p2);
+title('Gráfico da Distância');
+legend('Aceleração Filtrada', 'Distância');
+xlabel('Tempo(s)');
+ylabel(hAx(1), 'Aceleração(m/s²)')
+ylabel(hAx(2), 'Distância(m)')
+hold off
