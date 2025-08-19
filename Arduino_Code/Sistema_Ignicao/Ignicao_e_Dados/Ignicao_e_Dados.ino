@@ -5,8 +5,8 @@
 
 #define MPU 0x68
 
-#define rx 2
-#define tx 3
+#define rx 3
+#define tx 2
 #define saida 4
 
 float rawAx, rawAy, rawAz;
